@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Language = "es" | "en";
 type Theme = "light" | "dark";
@@ -32,6 +32,9 @@ const copy = {
   es: {
     navProjects: "Proyectos",
     navProfile: "Perfil",
+    navAria: "Navegación principal",
+    home: "Inicio",
+    skipToContent: "Saltar al contenido",
     contact: "Contacto",
     theme: "Cambiar tema",
     language: "Cambiar a inglés",
@@ -80,6 +83,9 @@ const copy = {
   en: {
     navProjects: "Projects",
     navProfile: "Profile",
+    navAria: "Main navigation",
+    home: "Home",
+    skipToContent: "Skip to content",
     contact: "Contact",
     theme: "Switch theme",
     language: "Cambiar a español",
@@ -284,6 +290,8 @@ export default function Home() {
   const [category, setCategory] = useState<Category>("all");
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [skillGroup, setSkillGroup] = useState<SkillGroup>("frontend");
+  const modalCloseRef = useRef<HTMLButtonElement | null>(null);
+  const projectTriggerRef = useRef<HTMLElement | null>(null);
   const t = copy[language];
 
   const visibleProjects = useMemo(
@@ -310,13 +318,26 @@ export default function Home() {
     const closeModal = (event: KeyboardEvent) => {
       if (event.key === "Escape") setActiveProject(null);
     };
-    document.body.style.overflow = activeProject ? "hidden" : "";
+
+    if (activeProject) {
+      document.body.style.overflow = "hidden";
+      window.requestAnimationFrame(() => modalCloseRef.current?.focus());
+    } else {
+      document.body.style.overflow = "";
+    }
+
     window.addEventListener("keydown", closeModal);
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", closeModal);
+      if (activeProject) projectTriggerRef.current?.focus();
     };
   }, [activeProject]);
+
+  const openProject = (project: Project) => {
+    projectTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setActiveProject(project);
+  };
 
   const toggleTheme = () => {
     setTheme((current) => {
@@ -331,13 +352,14 @@ export default function Home() {
 
   return (
     <main>
+      <a className="skipLink" href="#proyectos">{t.skipToContent}</a>
       <section className="hero" id="inicio">
-        <nav className="nav shell" aria-label="Main navigation">
-          <a className="brand" href="#inicio" aria-label="Home">MS<span>.</span></a>
+        <nav className="nav shell" aria-label={t.navAria}>
+          <a className="brand" href="#inicio" aria-label={t.home}>MS<span>.</span></a>
           <div className="navLinks"><a href="#proyectos">{t.navProjects}</a><a href="#perfil">{t.navProfile}</a></div>
           <div className="navControls">
-            <button className="iconButton languageToggle" onClick={toggleLanguage} aria-label={t.language}>{language === "es" ? "EN" : "ES"}</button>
-            <button className="iconButton" onClick={toggleTheme} aria-label={t.theme}>{theme === "light" ? <MoonIcon /> : <SunIcon />}</button>
+            <button type="button" className="iconButton languageToggle" onClick={toggleLanguage} aria-label={t.language}>{language === "es" ? "EN" : "ES"}</button>
+            <button type="button" className="iconButton" onClick={toggleTheme} aria-label={t.theme}>{theme === "light" ? <MoonIcon /> : <SunIcon />}</button>
             <a className="navCta" href="mailto:smatias94.rz@gmail.com">{t.contact} <ArrowIcon /></a>
           </div>
         </nav>
@@ -372,17 +394,17 @@ export default function Home() {
           <p className="sectionIntro">{t.projectsIntro}</p>
         </div>
 
-        <div className="filterRow" role="tablist" aria-label={t.navProjects}>
+        <div className="filterRow" aria-label={t.navProjects}>
           {categories.map((item) => (
-            <button className={category === item ? "filter active" : "filter"} key={item} onClick={() => setCategory(item)} role="tab" aria-selected={category === item}>
+            <button type="button" className={category === item ? "filter active" : "filter"} key={item} onClick={() => setCategory(item)} aria-pressed={category === item}>
               {t.categoryLabels[item]}<span>{item === "all" ? projects.length : projects.filter((project) => project.category === item).length}</span>
             </button>
           ))}
         </div>
 
-        <div className="projectList">
+        <div className="projectList" aria-live="polite">
           {visibleProjects.map((project) => (
-            <button className="projectCard" key={project.id} onClick={() => setActiveProject(project)} style={{ "--accent": project.accent } as React.CSSProperties}>
+            <button type="button" className="projectCard" key={project.id} onClick={() => openProject(project)} style={{ "--accent": project.accent } as React.CSSProperties}>
               <span className="projectIndex">{project.index}</span>
               <span className="projectVisual" aria-hidden="true"><img src={project.image} alt="" /></span>
               <span className="projectMain">
@@ -414,7 +436,7 @@ export default function Home() {
             <div className="skillPanelHead"><span>{t.techTitle}</span><small>{t.techHint}</small></div>
             <div className="skillTabs">
               {skillGroups.map((group) => (
-                <button key={group} className={skillGroup === group ? "active" : ""} onClick={() => setSkillGroup(group)}>{t.groupLabels[group]}</button>
+                <button type="button" key={group} className={skillGroup === group ? "active" : ""} onClick={() => setSkillGroup(group)}>{t.groupLabels[group]}</button>
               ))}
             </div>
             <div className="techGrid" aria-live="polite">
@@ -435,13 +457,13 @@ export default function Home() {
 
       {activeProject && (
         <div className="modalBackdrop" role="presentation" onMouseDown={() => setActiveProject(null)}>
-          <article className="modal" role="dialog" aria-modal="true" aria-labelledby="project-title" onMouseDown={(event) => event.stopPropagation()}>
-            <button className="modalClose" onClick={() => setActiveProject(null)} aria-label={t.close}><CloseIcon /></button>
+          <article className="modal" role="dialog" aria-modal="true" aria-labelledby="project-title" aria-describedby="project-summary" onMouseDown={(event) => event.stopPropagation()}>
+            <button type="button" ref={modalCloseRef} className="modalClose" onClick={() => setActiveProject(null)} aria-label={t.close}><CloseIcon /></button>
             <span className="modalStatus"><i style={{ background: activeProject.accent }} /> {activeProject.status[language]}</span>
             <div className="modalImage"><img src={activeProject.image} alt={`${activeProject.title} preview`} /></div>
             <p className="projectEyebrow">{activeProject.eyebrow[language]}</p>
             <h3 id="project-title">{activeProject.title}</h3>
-            <p className="modalLead">{activeProject.summary[language]}</p>
+            <p className="modalLead" id="project-summary">{activeProject.summary[language]}</p>
             <div className="modalBlock"><span>{t.result}</span><p>{activeProject.outcome[language]}</p></div>
             <div className="modalBlock"><span>{t.features}</span><ul>{activeProject.highlights[language].map((item) => <li key={item}>{item}</li>)}</ul></div>
             <div className="modalTech">{activeProject.stack.map((tech) => <span key={tech}>{tech}</span>)}</div>
