@@ -59,7 +59,7 @@ const copy = {
     profileText: "Desarrollador frontend enfocado en React, con experiencia trabajando con APIs y aplicaciones full-stack. Sumo testing, datos y herramientas visuales para entender el producto completo.",
     timeline: [
       ["Frontend", "Interfaz y producto", "React, JavaScript, TypeScript, HTML y CSS para experiencias responsive."],
-      ["Calidad", "QA testing", "Pruebas manuales y automatizadas para detectar problemas antes del usuario."],
+      ["Calidad", "QA testing", "Pruebas manuales, validación responsive y control de calidad de interfaces."],
       ["Versatilidad", "CMS y diseño", "WordPress y Figma para resolver desde el prototipo hasta un sitio administrable."],
     ],
     techTitle: "Tecnologías y herramientas",
@@ -107,7 +107,7 @@ const copy = {
     profileText: "Frontend developer focused on React, with experience working with APIs and full-stack applications. I also use testing, data and visual tools to understand the complete product.",
     timeline: [
       ["Frontend", "Interface and product", "React, JavaScript, TypeScript, HTML and CSS for responsive experiences."],
-      ["Quality", "QA testing", "Manual and automated testing to catch problems before users do."],
+      ["Quality", "QA testing", "Manual testing, responsive validation and interface quality checks."],
       ["Versatility", "CMS and design", "WordPress and Figma, from early prototypes to manageable websites."],
     ],
     techTitle: "Technologies and tools",
@@ -197,7 +197,7 @@ const projects: Project[] = [
       es: ["Menú visual con categorías", "Accesos a reservas y contacto", "Composición editorial centrada en producto"],
       en: ["Category-based visual menu", "Bookings and contact access", "Product-centered editorial layout"],
     },
-    stack: ["HTML5", "CSS3", "JavaScript", "Responsive"],
+    stack: ["HTML5", "CSS3", "JavaScript", "Bootstrap", "Responsive"],
     status: { es: "Demo online", en: "Live demo" },
     accent: "#c29b54",
     image: "/images/supremo.webp",
@@ -216,7 +216,7 @@ const projects: Project[] = [
       es: ["Catálogo orientado a conversión", "Navegación comercial directa", "Uso de imagen y contraste para guiar la mirada"],
       en: ["Conversion-focused catalog", "Direct commercial navigation", "Image and contrast used to guide attention"],
     },
-    stack: ["HTML5", "CSS3", "JavaScript", "UI Web"],
+    stack: ["HTML5", "CSS3", "JavaScript", "jQuery", "UI Web"],
     status: { es: "Demo online", en: "Live demo" },
     accent: "#3aa6e9",
     image: "/images/sucar.webp",
@@ -258,7 +258,7 @@ const skills = [
   { abbr: "Fi", name: "Figma", group: "tools" as SkillGroup, note: { es: "Diseño y prototipado UI", en: "UI design and prototyping" } },
   { abbr: "Git", name: "Git", group: "tools" as SkillGroup, note: { es: "Control de versiones", en: "Version control" } },
   { abbr: "Bs", name: "Bootstrap", group: "tools" as SkillGroup, note: { es: "Prototipado responsive", en: "Responsive prototyping" } },
-  { abbr: "QA", name: "QA Testing", group: "tools" as SkillGroup, note: { es: "Pruebas manuales y automatizadas", en: "Manual and automated testing" } },
+  { abbr: "QA", name: "QA Testing", group: "tools" as SkillGroup, note: { es: "Pruebas manuales y validación responsive", en: "Manual testing and responsive validation" } },
   { abbr: "Ps/Ai", name: "Adobe CC", group: "tools" as SkillGroup, note: { es: "Photoshop e Illustrator para recursos web", en: "Photoshop and Illustrator for web assets" } },
 ];
 
