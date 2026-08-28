@@ -140,13 +140,13 @@ const projects: Project[] = [
     title: "Vitalidapp",
     category: "apps",
     eyebrow: { es: "Aplicación full-stack · Salud", en: "Full-stack application · Healthcare" },
-    summary: { es: "Plataforma de servicios de salud con gestión de citas, usuarios e integración con APIs.", en: "Healthcare services platform with appointment scheduling, user management and API integration." },
+    summary: { es: "Plataforma de servicios de salud con gestión de citas, usuarios y flujos diferenciados por rol.", en: "Healthcare services platform with appointment scheduling, user management and role-based workflows." },
     outcome: { es: "Una experiencia completa para encontrar especialidades, administrar usuarios y organizar turnos desde una interfaz clara.", en: "A complete experience for finding specialties, managing users and scheduling appointments through a clear interface." },
     highlights: {
-      es: ["Gestión de citas y usuarios", "Integración entre interfaz y APIs", "Flujos de acceso y navegación responsive"],
-      en: ["Appointment and user management", "Frontend and API integration", "Authentication flows and responsive navigation"],
+      es: ["Gestión de citas y usuarios", "Acceso por roles con Spring Security", "Interfaz responsive renderizada con Thymeleaf"],
+      en: ["Appointment and user management", "Role-based access with Spring Security", "Responsive interface rendered with Thymeleaf"],
     },
-    stack: ["React", "JavaScript", "APIs", "Full-stack"],
+    stack: ["Java", "Spring Boot", "Thymeleaf", "MySQL"],
     status: { es: "Código disponible", en: "Source available" },
     accent: "#79d56b",
     image: "/images/vitalidapp.webp",
@@ -474,3 +474,4 @@ export default function Home() {
     </main>
   );
 }
+
