@@ -207,6 +207,10 @@ footer { min-height: 95px; display: flex; align-items: center; justify-content: 
 .modalBlock ul { list-style: none; }
 .modalBlock li { margin-bottom: 6px; }
 .modalBlock li::before { content: "↳"; color: var(--accent); margin-right: 8px; }
+.qaLinks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.qaLinks a { display: inline-flex; align-items: center; gap: 7px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--accent); font-size: 14px; font-weight: 800; transition: border-color .2s ease, background .2s ease; }
+.qaLinks a:hover { border-color: var(--accent); background: var(--accent-soft); }
+.qaLinks svg { width: 13px; height: 13px; }
 .modalTech { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 28px; }
 .modalTech span { padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 11px; font-weight: 750; }
 .modalLink { margin-top: 27px; display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-weight: 850; }
@@ -269,3 +273,4 @@ footer { min-height: 95px; display: flex; align-items: center; justify-content: 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
