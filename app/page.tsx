@@ -23,6 +23,13 @@ type Project = {
   image: string;
   href: string;
   hrefLabel: Localized;
+  qaEvidence?: {
+    summary: Localized;
+    links: Array<{
+      href: string;
+      label: Localized;
+    }>;
+  };
 };
 
 const categories: Category[] = ["all", "apps", "web", "ui"];
@@ -77,6 +84,7 @@ const copy = {
     email: "Escribime por email",
     result: "Resultado",
     features: "Características",
+    qaEvidence: "QA manual",
     close: "Cerrar detalle",
     open: "Abrir",
   },
@@ -128,6 +136,7 @@ const copy = {
     email: "Send me an email",
     result: "Outcome",
     features: "Features",
+    qaEvidence: "Manual QA",
     close: "Close project details",
     open: "Open",
   },
@@ -171,6 +180,26 @@ const projects: Project[] = [
     image: "/images/ladera-stay.png",
     href: "https://playground.wordpress.net/#%7B%22%24schema%22%3A%22https%3A%2F%2Fplayground.wordpress.net%2Fblueprint-schema.json%22%2C%22preferredVersions%22%3A%7B%22php%22%3A%228.3%22%2C%22wp%22%3A%22latest%22%7D%2C%22landingPage%22%3A%22%2F%22%2C%22login%22%3Atrue%2C%22steps%22%3A%5B%7B%22step%22%3A%22installTheme%22%2C%22themeData%22%3A%7B%22resource%22%3A%22git%3Adirectory%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2FMattVmx%2Fladera-stay-wordpress%22%2C%22ref%22%3A%22main%22%2C%22path%22%3A%22%2F%22%7D%2C%22options%22%3A%7B%22activate%22%3Atrue%7D%7D%5D%7D",
     hrefLabel: { es: "Visitar demo WordPress", en: "View WordPress demo" },
+    qaEvidence: {
+      summary: {
+        es: "Probé el flujo de consultas de punta a punta con 10 casos manuales. Encontré que el formulario aceptaba fechas pasadas, documenté el error, corregí la validación en el navegador y en WordPress, y repetí el caso con resultado satisfactorio.",
+        en: "I tested the inquiry flow end to end with 10 manual test cases. I found that the form accepted past dates, documented the issue, fixed the validation in both the browser and WordPress, and successfully retested it.",
+      },
+      links: [
+        {
+          href: "https://github.com/MattVmx/ladera-stay-wordpress/blob/main/qa/TEST_PLAN.md",
+          label: { es: "Plan de pruebas", en: "Test plan" },
+        },
+        {
+          href: "https://github.com/MattVmx/ladera-stay-wordpress/blob/main/qa/TEST_CASES.md",
+          label: { es: "Casos ejecutados · 10/10", en: "Executed cases · 10/10" },
+        },
+        {
+          href: "https://github.com/MattVmx/ladera-stay-wordpress/blob/main/qa/BUG_REPORTS.md",
+          label: { es: "Bug detectado y corregido", en: "Bug found and fixed" },
+        },
+      ],
+    },
   },
   {
     id: "punta-glacial",
@@ -485,6 +514,19 @@ export default function Home() {
             <p className="modalLead" id="project-summary">{activeProject.summary[language]}</p>
             <div className="modalBlock"><span>{t.result}</span><p>{activeProject.outcome[language]}</p></div>
             <div className="modalBlock"><span>{t.features}</span><ul>{activeProject.highlights[language].map((item) => <li key={item}>{item}</li>)}</ul></div>
+            {activeProject.qaEvidence && (
+              <div className="modalBlock">
+                <span>{t.qaEvidence}</span>
+                <div>
+                  <p>{activeProject.qaEvidence.summary[language]}</p>
+                  <div className="qaLinks">
+                    {activeProject.qaEvidence.links.map((link) => (
+                      <a href={link.href} key={link.href} target="_blank" rel="noreferrer">{link.label[language]} <ArrowIcon /></a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="modalTech">{activeProject.stack.map((tech) => <span key={tech}>{tech}</span>)}</div>
             <a className="modalLink" href={activeProject.href} target="_blank" rel="noreferrer">{activeProject.hrefLabel[language]} <ArrowIcon /></a>
           </article>
@@ -493,4 +535,5 @@ export default function Home() {
     </main>
   );
 }
+
 
