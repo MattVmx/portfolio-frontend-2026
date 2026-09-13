@@ -23,6 +23,8 @@ type Project = {
   image: string;
   href: string;
   hrefLabel: Localized;
+  sourceHref?: string;
+  sourceLabel?: Localized;
   qaEvidence?: {
     summary: Localized;
     links: Array<{
@@ -144,8 +146,29 @@ const copy = {
 
 const projects: Project[] = [
   {
-    id: "vitalidapp",
+    id: "postula",
     index: "01",
+    title: "Postula",
+    category: "apps",
+    eyebrow: { es: "Aplicación frontend · Productividad", en: "Frontend application · Productivity" },
+    summary: { es: "Organizador bilingüe de postulaciones con pipeline, filtros, puntaje de compatibilidad y persistencia local.", en: "Bilingual job application tracker with a visual pipeline, filters, match scores and local persistence." },
+    outcome: { es: "Una herramienta responsive que convierte una búsqueda laboral activa en un flujo claro, fácil de revisar y mantener actualizado.", en: "A responsive tool that turns an active job search into a clear workflow that is easy to review and keep up to date." },
+    highlights: {
+      es: ["Pipeline editable por etapas", "Búsqueda, filtros y métricas calculadas", "Español e inglés con temas claro y oscuro"],
+      en: ["Editable stage-based pipeline", "Search, filters and calculated metrics", "English and Spanish with light and dark themes"],
+    },
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Zod"],
+    status: { es: "Demo online", en: "Live demo" },
+    accent: "#a8ee45",
+    image: "/images/postula.png",
+    href: "https://postula-ten.vercel.app",
+    hrefLabel: { es: "Abrir Postula", en: "Open Postula" },
+    sourceHref: "https://github.com/MattVmx/postula",
+    sourceLabel: { es: "Ver código en GitHub", en: "View source on GitHub" },
+  },
+  {
+    id: "vitalidapp",
+    index: "02",
     title: "Vitalidapp",
     category: "apps",
     eyebrow: { es: "Aplicación full-stack · Salud", en: "Full-stack application · Healthcare" },
@@ -164,7 +187,7 @@ const projects: Project[] = [
   },
   {
     id: "ladera-stay",
-    index: "02",
+    index: "03",
     title: "Ladera Stay",
     category: "web",
     eyebrow: { es: "Sitio WordPress · Hospedaje", en: "WordPress site · Hospitality" },
@@ -203,7 +226,7 @@ const projects: Project[] = [
   },
   {
     id: "punta-glacial",
-    index: "03",
+    index: "04",
     title: "Punta Glacial",
     category: "web",
     eyebrow: { es: "Sitio web · Heladería", en: "Website · Ice cream shop" },
@@ -222,7 +245,7 @@ const projects: Project[] = [
   },
   {
     id: "macrotec",
-    index: "04",
+    index: "05",
     title: "Macrotec",
     category: "web",
     eyebrow: { es: "Sitio web · Inmobiliaria", en: "Website · Real estate" },
@@ -241,7 +264,7 @@ const projects: Project[] = [
   },
   {
     id: "supremo",
-    index: "05",
+    index: "06",
     title: "Supremo",
     category: "web",
     eyebrow: { es: "Sitio web · Restaurante", en: "Website · Restaurant" },
@@ -260,7 +283,7 @@ const projects: Project[] = [
   },
   {
     id: "sucar",
-    index: "06",
+    index: "07",
     title: "Sucar",
     category: "web",
     eyebrow: { es: "Sitio web · Concesionaria", en: "Website · Car dealership" },
@@ -279,7 +302,7 @@ const projects: Project[] = [
   },
   {
     id: "app-design",
-    index: "07",
+    index: "08",
     title: "App Design",
     category: "ui",
     eyebrow: { es: "Landing · Diseño visual", en: "Landing page · Visual design" },
@@ -528,12 +551,16 @@ export default function Home() {
               </div>
             )}
             <div className="modalTech">{activeProject.stack.map((tech) => <span key={tech}>{tech}</span>)}</div>
-            <a className="modalLink" href={activeProject.href} target="_blank" rel="noreferrer">{activeProject.hrefLabel[language]} <ArrowIcon /></a>
+            <div className="modalActions">
+              <a className="modalLink" href={activeProject.href} target="_blank" rel="noreferrer">{activeProject.hrefLabel[language]} <ArrowIcon /></a>
+              {activeProject.sourceHref && activeProject.sourceLabel && (
+                <a className="modalLink secondary" href={activeProject.sourceHref} target="_blank" rel="noreferrer">{activeProject.sourceLabel[language]} <ArrowIcon /></a>
+              )}
+            </div>
           </article>
         </div>
       )}
     </main>
   );
 }
-
 
