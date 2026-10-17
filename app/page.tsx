@@ -337,6 +337,7 @@ const skills = [
   { abbr: "Bs", name: "Bootstrap", group: "tools" as SkillGroup, note: { es: "Prototipado responsive", en: "Responsive prototyping" } },
   { abbr: "QA", name: "QA Testing", group: "tools" as SkillGroup, note: { es: "Pruebas manuales y validación responsive", en: "Manual testing and responsive validation" } },
   { abbr: "Ps/Ai", name: "Adobe CC", group: "tools" as SkillGroup, note: { es: "Photoshop e Illustrator para recursos web", en: "Photoshop and Illustrator for web assets" } },
+  { abbr: "IA", abbrEn: "AI", name: "IA", nameEn: "AI", group: "tools" as SkillGroup, note: { es: "Inteligencia artificial aplicada al desarrollo", en: "Artificial intelligence for development" } },
 ];
 
 function ArrowIcon() {
@@ -449,7 +450,7 @@ export default function Home() {
 
           <aside className="signalCard portraitCard" aria-label={t.profileLabel}>
             <div className="signalTop"><span>{t.profileLabel}</span><span className="signalPulse" /></div>
-            <div className="portrait" aria-hidden="true"><img src="/images/profile.webp" alt="" /><span>MATÍAS<br />SPERONI</span></div>
+            <div className="portrait" aria-hidden="true"><img src="/images/profile-solid.webp" alt="" width="650" height="650" /><span>MATÍAS<br />SPERONI</span></div>
             <dl className="signalStats">
               <div><dt>{t.focus}</dt><dd>{t.frontend}</dd></div>
               <div><dt>{t.extra}</dt><dd>{t.qa}</dd></div>
@@ -512,7 +513,7 @@ export default function Home() {
             </div>
             <div className="techGrid" aria-live="polite">
               {visibleSkills.map((skill) => (
-                <div className="techItem" key={skill.name}><span>{skill.abbr}</span><div><strong>{skill.name}</strong><small>{skill.note[language]}</small></div></div>
+                <div className="techItem" key={skill.name}><span>{language === "en" ? skill.abbrEn ?? skill.abbr : skill.abbr}</span><div><strong>{language === "en" ? skill.nameEn ?? skill.name : skill.name}</strong><small>{skill.note[language]}</small></div></div>
               ))}
             </div>
             <div className="languageCard"><span>{t.communication}</span><strong>{t.languageValue}</strong><p>{t.languageNote}</p></div>
