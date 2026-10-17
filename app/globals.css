@@ -230,7 +230,10 @@ footer { min-height: 95px; display: flex; align-items: center; justify-content: 
 
 @media (max-width: 760px) {
   .navLinks { display: none; }
-  .signalCard { min-height: 0; padding: 20px; gap: 20px; }
+  .hero { min-height: auto; }
+  .heroGrid { min-height: auto; padding-bottom: 36px; }
+  .signalCard, .heroActions .button.primary { display: none; }
+  .projects { padding-top: 36px; }
   .portrait { display: none; }
   .contact { flex-direction: column; text-align: center; }
   .socialLinks { justify-content: center; flex-wrap: wrap; }
@@ -246,13 +249,12 @@ footer { min-height: 95px; display: flex; align-items: center; justify-content: 
   .navCta { width: 41px; padding: 0; justify-content: center; font-size: 0; }
   .navCta svg { font-size: 14px; }
   .iconButton { width: 38px; height: 38px; }
-  .heroGrid { min-height: auto; padding-block: 65px 85px; }
+  .heroGrid { padding-top: 65px; }
   h1 { font-size: clamp(49px, 15vw, 70px); }
   .heroLead { font-size: 16px; }
   .button { width: 100%; }
-  .signalCard { padding: 18px; }
   .signalStats dd { font-size: 10px; }
-  .projects { padding-block: 95px 105px; }
+  .projects { padding-bottom: 105px; }
   .filterRow { overflow-x: auto; margin-right: -14px; padding-bottom: 22px; }
   .filter { white-space: nowrap; }
   .projectCard { grid-template-rows: 195px auto; }
