@@ -118,9 +118,9 @@ h1 em, h2 em { font-family: Georgia, "Times New Roman", serif; font-weight: 400;
 .signalCard { background: #0b1224; color: white; border-radius: 27px; min-height: 490px; padding: 24px; display: flex; flex-direction: column; box-shadow: var(--shadow); transform: rotate(1.2deg); overflow: hidden; }
 .signalTop { display: flex; justify-content: space-between; align-items: center; font-size: 10px; text-transform: uppercase; letter-spacing: .14em; color: #9ca7bb; }
 .signalPulse { width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 7px rgba(184,239,101,.1); }
-.portrait { flex: 1; min-height: 310px; margin: 18px 0; border-radius: 18px; overflow: hidden; position: relative; background: linear-gradient(145deg, #2b64dd, #67d7f2); }
+.portrait { flex: 1; min-height: 310px; margin: 18px 0; border-radius: 18px; overflow: hidden; position: relative; background: #31578a; }
 .portrait::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(3,7,17,.9)); }
-.portrait img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 34%; filter: saturate(.84) contrast(1.05); }
+.portrait img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 34%; filter: saturate(.84) contrast(1.05); }
 .portrait span { position: absolute; left: 18px; bottom: 16px; z-index: 1; font-size: 27px; line-height: .88; font-weight: 950; letter-spacing: -.06em; }
 .signalStats { margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .signalStats div { border-top: 1px solid rgba(255,255,255,.15); padding-top: 12px; }
@@ -230,6 +230,10 @@ footer { min-height: 95px; display: flex; align-items: center; justify-content: 
 
 @media (max-width: 760px) {
   .navLinks { display: none; }
+  .signalCard { min-height: 0; padding: 20px; gap: 20px; }
+  .portrait { display: none; }
+  .contact { flex-direction: column; text-align: center; }
+  .socialLinks { justify-content: center; flex-wrap: wrap; }
   .projectList { grid-template-columns: 1fr; }
   .sectionHeading { display: block; }
   .sectionIntro { margin-top: 24px; }
@@ -246,8 +250,7 @@ footer { min-height: 95px; display: flex; align-items: center; justify-content: 
   h1 { font-size: clamp(49px, 15vw, 70px); }
   .heroLead { font-size: 16px; }
   .button { width: 100%; }
-  .signalCard { min-height: 370px; padding: 18px; }
-  .portrait { min-height: 255px; }
+  .signalCard { padding: 18px; }
   .signalStats dd { font-size: 10px; }
   .projects { padding-block: 95px 105px; }
   .filterRow { overflow-x: auto; margin-right: -14px; padding-bottom: 22px; }
@@ -262,8 +265,8 @@ footer { min-height: 95px; display: flex; align-items: center; justify-content: 
   .skillPanelHead small { display: none; }
   .skillTabs { overflow-x: auto; }
   .techGrid { grid-template-columns: 1fr; min-height: 0; }
-  .contact { display: block; margin-top: 90px; }
-  .contactCircle { width: 128px; height: 128px; margin-top: 34px; }
+  .contact { margin-top: 90px; gap: 34px; }
+  .contactCircle { width: 128px; height: 128px; }
   footer { display: block; padding-block: 28px; line-height: 1.9; }
   footer span { display: block; }
   .modalBackdrop { padding: 12px; }
